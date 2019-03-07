@@ -1,6 +1,6 @@
-image: docker:latest
+image: docker:stable
 services:
-   - docker:dind
+  - docker:dind
 
 before_script:
   - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
