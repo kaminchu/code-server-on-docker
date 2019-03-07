@@ -4,9 +4,11 @@ ENV CODE_VERSION 1.31.1-100
 
 WORKDIR /work
 RUN apt-get update && apt-get install -y git libxkbfile-dev libsecret-1-dev bash \
- && npm install -g yarn \
  && git clone --depth=1 -b ${CODE_VERSION} https://github.com/codercom/code-server.git \
- && cd code-server && yarn && yarn task build:server:binary
+ && cd code-server \
+ && yarn self-update \
+ && yarn install --network-concurrency 1 \
+ && yarn task build:server:binary
 
 FROM ubuntu:18.10
 ENV CODE_USER=code CODE_PASSWORD=password
