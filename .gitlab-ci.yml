@@ -1,0 +1,14 @@
+image: docker:latest
+services:
+   - docker:dind
+
+before_script:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+build:
+   stage: build
+   script:
+     - docker build -t kaminchu/code-server-on-docker:latest .
+     - docker push kaminchu/code-server-on-docker:latest
+   tags:
+     - docker
