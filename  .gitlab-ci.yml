@@ -5,10 +5,11 @@ services:
 before_script:
   - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
+stages:
+  - build
+
 build:
    stage: build
    script:
      - docker build -t kaminchu/code-server-on-docker:latest .
      - docker push kaminchu/code-server-on-docker:latest
-   tags:
-     - docker
