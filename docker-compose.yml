@@ -1,0 +1,9 @@
+version: '2'
+services:
+  server:
+    container_name: code-server
+    image: kaminchu/code-server-on-docker
+    command: --allow-http --no-auth
+    ports:
+      - "80:8443"
+    restart: always
