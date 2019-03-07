@@ -1,4 +1,4 @@
-FROM node:8.15.0-jessie as builder
+FROM node:8.15.0-stretch as builder
 
 ENV CODE_VERSION 1.31.1-100
 
