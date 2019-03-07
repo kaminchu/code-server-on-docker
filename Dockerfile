@@ -1,10 +1,8 @@
 FROM node:8.15.0-stretch as builder
 
-ENV CODE_VERSION 1.31.1-100
-
 WORKDIR /work
 RUN apt-get update && apt-get install -y git libxkbfile-dev libsecret-1-dev bash \
- && git clone --depth=1 -b ${CODE_VERSION} https://github.com/codercom/code-server.git \
+ && git clone https://github.com/codercom/code-server.git \
  && cd code-server \
  && npm install -g yarn@1.13 \
  && yarn --network-concurrency 1 \
