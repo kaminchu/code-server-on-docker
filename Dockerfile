@@ -5,6 +5,7 @@ RUN apt-get update && apt-get install -y git libxkbfile-dev libsecret-1-dev bash
  && git clone https://github.com/codercom/code-server.git \
  && cd code-server \
  && npm install -g yarn@1.13 \
+ && rm yarn.lock \
  && yarn --network-concurrency 1 \
  && yarn task build:server:binary
 
@@ -16,7 +17,8 @@ ARG CODE_PASSWORD=password
 
 COPY --from=builder /work/code-server/packages/server/cli-linux-x64 /usr/local/bin/code-server
 
-RUN apt-get update && apt-get install -y openssl net-tools sudo locales locale-gen en_US.UTF-8
+RUN apt-get update && apt-get install -y openssl net-tools sudo locales \
+ && locale-gen en_US.UTF-8
 
 RUN groupadd -g 1000 ${CODE_USER} \
  && useradd  -g ${CODE_USER} -G sudo -m -s /bin/bash ${CODE_USER} \
