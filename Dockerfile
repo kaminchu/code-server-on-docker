@@ -31,6 +31,6 @@ RUN groupadd -g 1000 ${CODE_USER} \
 
 USER ${CODE_USER}
 
-WORKDIR /${CODE_USER}
+WORKDIR /home/${CODE_USER}
 EXPOSE  8443
 ENTRYPOINT ["code-server"]
