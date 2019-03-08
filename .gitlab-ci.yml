@@ -13,3 +13,5 @@ build:
    script:
      - docker build -t kaminchu/code-server-on-docker:latest .
      - docker push kaminchu/code-server-on-docker:latest
+   tags:
+     - docker
