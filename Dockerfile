@@ -1,7 +1,7 @@
 FROM node:8.15.0-alpine as builder
 
 WORKDIR /work
-RUN apk add --update --no-cache git libxkbfile-dev libsecret-1-dev \
+RUN apk add --update --no-cache git libxkbfile libsecret \
  && git clone https://github.com/codercom/code-server.git \
  && cd code-server \
  && npm install -g yarn@1.14.0 \
