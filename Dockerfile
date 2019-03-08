@@ -17,7 +17,7 @@ ARG CODE_PASSWORD=password
 COPY --from=builder /work/code-server /usr/local/bin/
 
 RUN apt-get update \
- && apt-get install -y openssl net-tools sudo locales \
+ && apt-get install -y openssl net-tools sudo locales git \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
