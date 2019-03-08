@@ -4,7 +4,8 @@ WORKDIR /work
 RUN apt-get update && apt-get install -y git libxkbfile-dev libsecret-1-dev bash \
  && git clone https://github.com/codercom/code-server.git \
  && cd code-server \
- && npm install -g yarn@1.13 \
+ && npm install -g yarn@1.14.0 \
+ && yarn install \
  && yarn task build:server:binary
 
 FROM ubuntu:18.10
