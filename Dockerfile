@@ -1,12 +1,12 @@
-FROM node:8.15.0-alpine as builder
+FROM ubuntu:18.04 as builder
+
+ARG CODE_VERSION=1.31.1-100
 
 WORKDIR /work
-RUN apk add --update --no-cache git libxkbfile libsecret python gcc libc-dev g++ tar \
- && git clone https://github.com/codercom/code-server.git \
- && cd code-server \
- && npm install -g yarn@1.13.0 \
- && yarn install \
- && yarn task build:server:binary
+RUN apt-get update && apt-get install -y tar wget \
+ && wget https://github.com/codercom/code-server/releases/download/${CODE_VERSION}/code-server-${CODE_VERSION}-linux-x64.tar.gz \
+ && tar xvzf code-server-${CODE_VERSION}-linux-x64.tar.gz \
+ && cp code-server-${CODE_VERSION}-linux-x64/code-server /work/
 
 FROM ubuntu:18.10
 ENV LANG=en_US.UTF-8
@@ -14,7 +14,7 @@ ENV LANG=en_US.UTF-8
 ARG CODE_USER=code
 ARG CODE_PASSWORD=password
 
-COPY --from=builder /work/code-server/packages/server/cli-linux-x64 /usr/local/bin/code-server
+COPY --from=builder /work/code-server /usr/local/bin/
 
 RUN apt-get update && apt-get install -y openssl net-tools sudo locales \
  && locale-gen en_US.UTF-8
