@@ -16,8 +16,12 @@ ARG CODE_PASSWORD=password
 
 COPY --from=builder /work/code-server /usr/local/bin/
 
-RUN apt-get update && apt-get install -y openssl net-tools sudo locales \
- && locale-gen en_US.UTF-8
+RUN apt-get update 
+ && apt-get install -y openssl net-tools sudo locales \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN locale-gen en_US.UTF-8
 
 RUN groupadd -g 1000 ${CODE_USER} \
  && useradd  -g ${CODE_USER} -G sudo -m -s /bin/bash ${CODE_USER} \
