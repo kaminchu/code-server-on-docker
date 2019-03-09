@@ -29,8 +29,10 @@ RUN groupadd -g 1000 ${CODE_USER} \
  && echo 'Defaults visiblepw' >> /etc/sudoers \
  && echo "${CODE_USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-USER ${CODE_USER}
+
 
 WORKDIR /home/${CODE_USER}/work
+RUN chown ${CODE_USER}:${CODE_USER} -Rf /home/${CODE_USER}/work
+USER ${CODE_USER}
 EXPOSE  8443
 ENTRYPOINT ["code-server"]
