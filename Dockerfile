@@ -1,6 +1,6 @@
 FROM ubuntu:18.04 as builder
 
-ARG CODE_VERSION=1.31.1-100
+ARG CODE_VERSION=1.32.0-245
 
 WORKDIR /work
 RUN apt-get update && apt-get install -y tar wget \
