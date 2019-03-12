@@ -11,7 +11,7 @@ stages:
 build:
    stage: build
    script:
-     - docker build -t kaminchu/code-server-on-docker:latest .
-     - docker push kaminchu/code-server-on-docker:latest
+     - docker build -t kaminchu/code-server-on-docker:gitlab-build .
+     - docker push kaminchu/code-server-on-docker:gitlab-build
    tags:
      - docker
